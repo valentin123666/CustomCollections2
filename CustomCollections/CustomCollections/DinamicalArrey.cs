@@ -41,7 +41,11 @@ namespace CustomCollections
             _internalArray = array;
         }
 
-        public void Insert(int index, T x)
+        public void Insert ( int index, T x )
+        {
+            InsertInto(index - 1, x);
+        }
+        private void InsertInto(int index, T x)
         {
             if (_internalArray.Length == Count)
             {
@@ -93,18 +97,35 @@ namespace CustomCollections
         public void AddRange(IEnumerable<T> addArrey)   
         {
             var addingCount = addArrey.Count();
+            
             if (addingCount >= Capacity)
             {
-                Array.Resize(ref _internalArray,(_internalArray.Length*DefauultCapacity*2)+addingCount);
+                Array.Resize(ref _internalArray,(_internalArray.Length+DefauultCapacity*2)+addingCount);
             }
             var newCount = Count + addingCount;
             
             foreach(var addingItem in addArrey)
-            {
+            { 
+                
                 _internalArray[Count++] = addingItem;
             }          
-        }     
-       
+        }
+        public void InsertRange(int index , IEnumerable<T> addArrey)
+        {
+            var addingCount = addArrey.Count();
+            
+            if (addingCount >= Capacity)
+            {
+                Array.Resize(ref _internalArray, (_internalArray.Length + DefauultCapacity * 2) + addingCount);
+            }
+            var newCount = Count + addingCount;
+            foreach (var addingItem in addArrey.Reverse())
+            {
+                InsertInto(index-1, addingItem);               
+            }            
+            newCount++;           
+        }
+        
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Count; i++)
