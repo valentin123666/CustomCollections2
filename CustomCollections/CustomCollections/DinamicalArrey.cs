@@ -82,17 +82,21 @@ namespace CustomCollections
             Count--;
         }
 
-        public int IndexOf(T x)
+        public void IndexOf(T x)
         {
+            var e = -1;            
             for (int i = 0; i < Count; i++)
-            {
+            {  
                 if (x.Equals(_internalArray[i]))
                 {
-                    return i;
-                }
+                    e = i;
+                    break;
+                    Console.WriteLine(e);
+                    
+                } 
             }
-
-            return -1;
+            Console.WriteLine(e);
+            Console.ReadKey();
         }
         public void AddRange(IEnumerable<T> addArrey)   
         {
@@ -125,6 +129,24 @@ namespace CustomCollections
             }            
             newCount++;           
         }
+
+        public void Contains(T x)
+        {
+            var flag = false;
+            
+          
+              for(var i = 0; i < Count; i++)
+            {
+              if (x.Equals(_internalArray[i]))
+            {
+                flag = true;
+               break;
+                    Console.WriteLine(flag);             
+             }
+             }
+            Console.WriteLine(flag);
+            Console.ReadKey();
+           }
         
         public IEnumerator<T> GetEnumerator()
         {
