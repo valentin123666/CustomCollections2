@@ -152,8 +152,7 @@ namespace CustomCollections
             string representdtion = "[";
             for (var i = 0; i < Count; i++ )
             {
-
-                var get = _internalArray[i].ToString();
+                representdtion += _internalArray[i].ToString();
                 if(i<Count-1)
                 {
                     
