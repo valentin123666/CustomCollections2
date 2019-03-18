@@ -146,7 +146,32 @@ namespace CustomCollections
              }
             Console.WriteLine(flag);
             Console.ReadKey();
-           }
+         }
+        public string GetStringRepresentions()
+        {
+            string representdtion = "[";
+            for (var i = 0; i < Count; i++ )
+            {
+
+                var get = _internalArray[i].ToString();
+                if(i<Count-1)
+                {
+                    
+                    representdtion += ",";
+                    
+                }
+            }
+            representdtion += "]";
+            return representdtion;
+        }
+        public void Reverse()
+        {
+            for (var i = 0; i < Count; i++)
+            {
+                _internalArray[i] = _internalArray[i];
+
+            }
+        }
         
         public IEnumerator<T> GetEnumerator()
         {

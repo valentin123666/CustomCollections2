@@ -15,6 +15,7 @@ namespace CustomCollections
 
             var _dinamical = new DinamicalArrey<int>();
 
+            
                         _dinamical.Add(22);
                       _dinamical.Add(23);
                     _dinamical.Add(24);
@@ -22,13 +23,14 @@ namespace CustomCollections
                 _dinamical.Insert(2,777 );
               _dinamical.AddRange(v);
              _dinamical.InsertRange(3, f);
-           /// _dinamical.IndexOf(23);
-         //   _dinamical.Contains(22);
             
+            /// _dinamical.IndexOf(23);
+            //   _dinamical.Contains(22);
+            _dinamical.Reverse();
 
 
-            
-            foreach (var g in _dinamical)
+
+            foreach (var g in _dinamical.GetStringRepresentions())
             {
                 Console.WriteLine(g);
             }
