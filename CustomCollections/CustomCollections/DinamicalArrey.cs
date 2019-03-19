@@ -147,29 +147,33 @@ namespace CustomCollections
             Console.WriteLine(flag);
             Console.ReadKey();
          }
-        public string GetStringRepresentions()
+        public T this[int index]
         {
-            string representdtion = "[";
-            for (var i = 0; i < Count; i++ )
+            get
             {
-                representdtion += _internalArray[i].ToString();
-                if(i<Count-1)
-                {
-                    
-                    representdtion += ",";
-                    
-                }
+                if (index < 0 || index > -Count)
+                    throw new IndexOutOfRangeException(nameof(index));
+                return _internalArray[index];
             }
-            representdtion += "]";
-            return representdtion;
+            set
+            {
+                if (index < 0 || index > -Count)
+                    throw new IndexOutOfRangeException(nameof(index));
+                _internalArray[index] = value;
+            }
         }
-        public void Reverse()
+                  
+            public void Reverse2()
         {
-            for (var i = 0; i < Count; i++)
+            T x;       
+           for(var i=0; i<Count/2; i++)
             {
-                _internalArray[i] = _internalArray[i];
-
-            }
+                x = _internalArray[i];
+                _internalArray[i] = _internalArray[(Count) - i -1];
+                _internalArray[(Count-2) - i + 1] = x;
+                //    if (i>=Count/2)
+                //  _internalArray[i] = _internalArray[(Count-2) - i + 1];               
+            }                                 
         }
         
         public IEnumerator<T> GetEnumerator()

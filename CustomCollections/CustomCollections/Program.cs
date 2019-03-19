@@ -20,19 +20,20 @@ namespace CustomCollections
                       _dinamical.Add(23);
                     _dinamical.Add(24);
                   _dinamical.Add(25);
-                _dinamical.Insert(2,777 );
+                _dinamical.Insert(2,777 ); 
               _dinamical.AddRange(v);
              _dinamical.InsertRange(3, f);
-            
+            _dinamical.InsertRange(6, f);
+
             /// _dinamical.IndexOf(23);
             //   _dinamical.Contains(22);
-            _dinamical.Reverse();
+            _dinamical.Reverse2();
 
 
-
-            foreach (var g in _dinamical.GetStringRepresentions())
+            foreach (var g in _dinamical)
             {
                 Console.WriteLine(g);
+                
             }
              
             Console.ReadKey();
