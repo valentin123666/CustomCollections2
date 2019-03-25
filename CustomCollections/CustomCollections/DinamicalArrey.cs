@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CustomCollections
 {
-    public class DinamicalArrey<T> : IEnumerable<T>
+    public class DinamicalArrey<T> : IEnumerable<T> , IComparable<DinamicalArrey<T>>
     {
         private T[] _internalArray;     
 
@@ -147,22 +147,7 @@ namespace CustomCollections
             Console.WriteLine(flag);
             Console.ReadKey();
          }
-        public T this[int index]
-        {
-            get
-            {
-                if (index < 0 || index > -Count)
-                    throw new IndexOutOfRangeException(nameof(index));
-                return _internalArray[index];
-            }
-            set
-            {
-                if (index < 0 || index > -Count)
-                    throw new IndexOutOfRangeException(nameof(index));
-                _internalArray[index] = value;
-            }
-        }
-                  
+                        
             public void Reverse2()
         {
             T x;       
@@ -171,11 +156,20 @@ namespace CustomCollections
                 x = _internalArray[i];
                 _internalArray[i] = _internalArray[(Count) - i -1];
                 _internalArray[(Count-2) - i + 1] = x;
-                //    if (i>=Count/2)
-                //  _internalArray[i] = _internalArray[(Count-2) - i + 1];               
+                               
             }                                 
         }
-        
+
+
+        public void BinarySearch_int(T x)
+        {
+             var bin = new BinarySearchRec<T>();
+            Array.Sort(_internalArray);
+            var mid = Count / 2;
+              bin.BinarySearch(_internalArray, x, 0, Count);
+         //   if (_internalArray[mid]>x)
+        }
+         
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Count; i++)
@@ -188,5 +182,22 @@ namespace CustomCollections
         {
             return GetEnumerator();
         }
+
+    //    public int CompareTo(DinamicalArrey<T> other)
+      //  {
+        //    return Count.CompareTo(other.Count);
+        //}
+
+        
+
+        public int CompareTo(DinamicalArrey<T> obj)
+        {
+            if (this.Count > obj.Count)
+                return 1;
+            if (this.Count < obj.Count)
+                return -1;
+            else
+                return 0;
+           }
     }
 }
