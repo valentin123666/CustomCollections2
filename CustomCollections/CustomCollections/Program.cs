@@ -25,10 +25,10 @@ namespace CustomCollections
              _dinamical.InsertRange(3, f);
             _dinamical.InsertRange(6, f);
 
-            // _dinamical.IndexOf(23);
+          //  _dinamical.IndexOf(22);
             //   _dinamical.Contains(22);
             // _dinamical.Reverse2();
-            _dinamical.BinarySearch(3);
+            Console.WriteLine(_dinamical.BinarySearch(3));
 
 
             foreach (var g in _dinamical)

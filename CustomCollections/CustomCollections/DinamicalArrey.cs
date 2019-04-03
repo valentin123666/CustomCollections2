@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace CustomCollections
 {
-    public class DinamicalArrey<T> : IEnumerable<T> , IComparable<DinamicalArrey<T>>
+    public class DinamicalArrey<T> : IEnumerable<T> 
     {
-        private T[] _internalArray;     
+        private T[] _internalArray;
 
         private void ThrowIfInvalid(int index)
         {
@@ -89,7 +89,7 @@ namespace CustomCollections
             {  
                 if (x.Equals(_internalArray[i]))
                 {
-                    e = i;
+                    e = i+1;
                     break;
                     Console.WriteLine(e);
                     
@@ -161,16 +161,31 @@ namespace CustomCollections
         }
 
 
-        public void BinarySearch_int(T x)
+        public int BinarySearchICom(T item,int form,int end, IComparer<T> comparer)
         {
-             var bin = new BinarySearchRec<T>();
-            Array.Sort(_internalArray);
-            var mid = Count / 2;
-              bin.BinarySearch(_internalArray, x, 0, Count);
-         //   if (_internalArray[mid]>x)
+            if (form == end && comparer.Compare(item, _internalArray[form]) == 0)
+                return form;
+            if (end - form < 1)
+                return -2;
+
+            int mid = (form / 2) + (end / 2);
+
+            if (comparer.Compare(item, _internalArray[mid]) < 0)
+                return BinarySearchICom(item, form, mid, comparer);
+            if (comparer.Compare(item, _internalArray[mid]) > 0)
+                return BinarySearchICom(item, mid + 1, end, comparer);
+
+            return mid;            
         }
-         
-        public IEnumerator<T> GetEnumerator()
+        public int BinarySearch(T item, IComparer<T> comparer = null)
+        {
+            comparer = comparer ?? new CustomComparer<T>();
+            if (comparer.Compare(item, _internalArray[Count - 1]) > 0 || comparer.Compare(_internalArray[0], item) > 0)
+               return -1;
+            return BinarySearchICom(item,0, Count, comparer);
+        }   
+
+    public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Count; i++)
             {
@@ -183,21 +198,21 @@ namespace CustomCollections
             return GetEnumerator();
         }
 
-    //    public int CompareTo(DinamicalArrey<T> other)
-      //  {
+        //    public int CompareTo(DinamicalArrey<T> other)
+        //  {
         //    return Count.CompareTo(other.Count);
         //}
 
-        
 
-        public int CompareTo(DinamicalArrey<T> obj)
-        {
-            if (this.Count > obj.Count)
-                return 1;
-            if (this.Count < obj.Count)
-                return -1;
-            else
-                return 0;
-           }
+
+//        public int CompareTo(DinamicalArrey<T> obj )
+  //      {
+    //        if (this.Count > obj.Count)
+      //          return 1;
+        //    if (this.Count < obj.Count)
+          //      return -1;
+            //else
+              //  return 0;
+           //}
     }
 }
