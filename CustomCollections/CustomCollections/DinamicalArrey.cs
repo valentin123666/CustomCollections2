@@ -182,22 +182,22 @@ namespace CustomCollections
         {
             comparer = comparer ?? new CustomComparer<T>();
             T temp;
-            for (var i = 0; i < Count; i++)
+            for (var i = 0; i < Count-1; i++)
             {
-                for (var j = i; j < Count - 1; j++)
+                for (var j = i +1; j < Count; j++)
                 {
-                    if (comparer.Compare(_internalArray[j + 1], _internalArray[i]) < 0)
+                    if (comparer.Compare(_internalArray[j], _internalArray[i]) < 0)
                     {
-                        temp = _internalArray[j];
-                        _internalArray[j] = _internalArray[j + 1];
-                        _internalArray[j + 1] = temp;
+                        temp = _internalArray[i];
+                        _internalArray[i] = _internalArray[j];
+                        _internalArray[j] = temp;
                     }
 
                 }        
                 if (comparer.Compare(item, _internalArray[Count - 1]) > 0 || comparer.Compare(_internalArray[0], item) > 0)
                     return -1;                
             }
-            return BinarySearchICom(item,0, Count, comparer);
+            return BinarySearchICom(item,0, Count-1, comparer);
         }   
 
     public IEnumerator<T> GetEnumerator()
