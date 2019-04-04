@@ -166,7 +166,7 @@ namespace CustomCollections
             if (form == end && comparer.Compare(item, _internalArray[form]) == 0)
                 return form;
             if (end - form < 1)
-                return -2;
+                return -1;
 
             int mid = (form / 2) + (end / 2);
 
@@ -177,11 +177,26 @@ namespace CustomCollections
 
             return mid;            
         }
+        
         public int BinarySearch(T item, IComparer<T> comparer = null)
         {
             comparer = comparer ?? new CustomComparer<T>();
-            if (comparer.Compare(item, _internalArray[Count - 1]) > 0 || comparer.Compare(_internalArray[0], item) > 0)
-               return -1;
+            T temp;
+            for (var i = 0; i < Count; i++)
+            {
+                for (var j = i; j < Count - 1; j++)
+                {
+                    if (comparer.Compare(_internalArray[j + 1], _internalArray[i]) < 0)
+                    {
+                        temp = _internalArray[j];
+                        _internalArray[j] = _internalArray[j + 1];
+                        _internalArray[j + 1] = temp;
+                    }
+
+                }        
+                if (comparer.Compare(item, _internalArray[Count - 1]) > 0 || comparer.Compare(_internalArray[0], item) > 0)
+                    return -1;                
+            }
             return BinarySearchICom(item,0, Count, comparer);
         }   
 
@@ -197,14 +212,7 @@ namespace CustomCollections
         {
             return GetEnumerator();
         }
-
-        //    public int CompareTo(DinamicalArrey<T> other)
-        //  {
-        //    return Count.CompareTo(other.Count);
-        //}
-
-
-
+        
 //        public int CompareTo(DinamicalArrey<T> obj )
   //      {
     //        if (this.Count > obj.Count)
